@@ -7,6 +7,39 @@ var randomNumber = function(min, max) {
   return value;
 };
 
+var fightOrSkip = function() {
+  // ask player if they'd like to fight or skip using fightOrSkip function
+  //repeat and execute as long as the enemy-robot is alive
+  while (playerInfo.health > 0 && enemy.health > 0) {
+    fightOrSkip(); // <-- Replace code with this function call
+    var damage = randomNumber(playerInfo.attack - 3, playerInfo.attack);
+  }
+  // if player picks "skip" confirm and then stop the loop
+  promptFight = promptFight.toLowerCase();
+  if (promptFight === "skip") {
+    // confirm player wants to skip
+    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+    // if yes (true), leave fight
+    if (confirmSkip) {
+      window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
+      // subtract money from playerMoney for skipping, but don't let them go into the negative
+      playerInfoMoney = Math.max(0, playerInfo.money - 10);
+      //return true if player wants to leave
+      return true;
+    }
+    while (playerInfo.health > 0 && enemy.health > 0) {
+      //ask player if they'd like to fight or skip using fightOrSkip function
+      if (fightOrSkip()) {
+        //if true, leave fight by breaking loop
+        break;
+      }
+    }
+      shop();
+    }
+  }
+
+
 // fight function (now with parameter for enemy's object holding name, health, and attack values)
 var fight = function(enemy) {
   while (playerInfo.health > 0 && enemy.health > 0) {
@@ -195,7 +228,7 @@ var playerInfo = {
   },
 }}
 
-  refillHealth: function() {
+  refillHealth = function() {
     if (this.money >= 7) {
       window.alert("Refilling player's health by 20 for 7 dollars.");
       this.health += 20;
@@ -204,8 +237,8 @@ var playerInfo = {
     else {
       window.alert("You don't have enough money!");
     }
-  },
-  upgradeAttack: function() {
+  }
+  upgradeAttack = function() {
     if (this.money >= 7) {
       window.alert("Upgrading player's attack by 6 for 7 dollars.");
       this.attack += 6;
@@ -215,7 +248,7 @@ var playerInfo = {
       window.alert("You don't have enough money!");
     }
   }
-};{}
+
 
 // enemy information
 var enemyInfo = [
