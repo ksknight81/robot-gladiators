@@ -215,7 +215,7 @@ var playerInfo = {
       window.alert("You don't have enough money!");
     }
   }
-};
+};{}
 
 // enemy information
 var enemyInfo = [
